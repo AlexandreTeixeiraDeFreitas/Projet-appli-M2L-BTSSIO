@@ -3,7 +3,7 @@ const router = require('express-promise-router')();
 const users = require('../controllers/users');
 const {circuit, add_circuit, del_circuit} = require('../controllers/circuit')
 const {abonnee, add_abonnee,verify_mdp} = require('../controllers/users');
-const {competition, add_competition, del_competition, inscription} = require('../controllers/competition')
+const {competition, add_competition, del_competition, inscription, inscrit, del_inscrit} = require('../controllers/competition')
 
 
 
@@ -30,5 +30,9 @@ router.route('/competition/del_competition/:id')
     .get(del_competition);
 router.route('/competition/inscription/:id/:idcompetition')
     .get(inscription);
+router.route('/competition/inscrit/:idcompetition')
+    .get(inscrit);
+router.route('/competition/del_inscrit/:idcompetition/:iduser')
+    .get(del_inscrit);
 
 module.exports = router;

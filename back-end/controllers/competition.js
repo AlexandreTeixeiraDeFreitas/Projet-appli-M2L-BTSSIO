@@ -66,6 +66,35 @@ module.exports = {
             if (connexion) connexion.end()
         }
     },
+    inscrit: async (req, res, next) => {
+        let connexion;
+        try {
+            const idcompetition = parseInt(req.params.idcompetition)
+            connexion = await pool.getConnection();
+            const result = await connexion.query(' CALL inscrit("'+idcompetition+'");');
+            console.log(result);
+            return res.status(200).json(result)
+        } catch (error) {
+            return res.status(400).json(error.message);
+        } finally {
+            if (connexion) connexion.end()
+        }
+    },
+    del_inscrit: async (req, res, next) => {
+        let connexion;
+        try {
+            const idcompetition = parseInt(req.params.idcompetition)
+            const iduser = parseInt(req.params.iduser)
+            connexion = await pool.getConnection();
+            const result = await connexion.query(' CALL del_inscrit('+idcompetition+','+iduser+');');
+            console.log(result);
+            return res.status(200).json(result)
+        } catch (error) {
+            return res.status(400).json(error.message);
+        } finally {
+            if (connexion) connexion.end()
+        }
+    },
 
 
 

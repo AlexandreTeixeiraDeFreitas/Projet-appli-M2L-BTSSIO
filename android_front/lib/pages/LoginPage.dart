@@ -20,15 +20,29 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.blue,
-        body: ProgressHUD(
-          child: Form(
-            key: globalFormKey,
-            child: _loginUI(context),
+        body: FractionallySizedBox(
+          child: Container(
+            child: Center(
+                child: ProgressHUD(
+              child: Form(
+                key: globalFormKey,
+                child: _loginUI(context),
+              ),
+              inAsyncCall: isAPIcallProcess,
+              opacity: 0.3,
+              key: UniqueKey(),
+            )),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.red,
+                  Color.fromARGB(255, 255, 234, 47),
+                ],
+              ),
+            ),
           ),
-          inAsyncCall: isAPIcallProcess,
-          opacity: 0.3,
-          key: UniqueKey(),
         ),
       ),
     );
@@ -38,16 +52,26 @@ class _LoginPageState extends State<LoginPage> {
     return SingleChildScrollView(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Padding(
-              padding: EdgeInsets.only(left: 20, top: 90, bottom: 30),
-              child: Text(
-                "Connexion :",
-                style: TextStyle(
+              padding: EdgeInsets.only(left: 20, bottom: 30),
+              child: Image(
+                image: AssetImage('assets/logo.png'),
+                height: 150,
+              ),
+            ),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(left: 20, bottom: 30),
+                child: Text(
+                  "Espace Admin M2L",
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white),
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
             FormHelper.inputFieldWidget(context, "Email", "Email",
@@ -69,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
               child: FormHelper.inputFieldWidget(
                 context,
                 "Mot_de_passe",
-                "mot de passe",
+                "Mot de passe",
                 (onValidateVal) {
                   if (onValidateVal.isEmpty) {
                     return "Le mot de passe ne peut être vide";
@@ -90,14 +114,14 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             Center(
-              child: FormHelper.submitButton("login", () {
+              child: FormHelper.submitButton("Connexion", () {
                 dynamic validate = globalFormKey.currentState?.validate();
                 if (validate != null && validate) {
                   globalFormKey.currentState?.save();
                   Competition.Login(context, email, password);
                 }
               },
-                  btnColor: Colors.blue,
+                  btnColor: Color.fromARGB(0, 155, 155, 155),
                   borderColor: Colors.white,
                   txtColor: Colors.white,
                   borderRadius: 10),

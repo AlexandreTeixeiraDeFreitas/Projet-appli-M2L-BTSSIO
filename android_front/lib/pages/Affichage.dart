@@ -35,8 +35,8 @@ class _AffichageState extends State<Affichage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Compétitons"),
-      ),
+          title: const Text("Compétitons"),
+          backgroundColor: Color.fromARGB(255, 218, 53, 53)),
       body: Container(
         child: FutureBuilder<List>(
           future: _CompList,
@@ -92,23 +92,54 @@ class _AffichageState extends State<Affichage> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   ElevatedButton(
-                                    onPressed: () {
-                                      idCompt = snapshot.data![i]
-                                              ['idcompetition']
-                                          .toString();
-                                      Competition.supprimer(context, idCompt);
-                                    },
+                                    onPressed: () {},
                                     style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Color.fromARGB(255, 218, 53, 53)),
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(360),
-                                            side:
-                                                BorderSide(color: Colors.red)),
+                                            side: BorderSide(
+                                                color: Colors.white)),
                                       ),
                                     ),
-                                    child: const Text('delete'),
+                                    child: IconButton(
+                                        icon: Icon(Icons.delete),
+                                        onPressed: () {
+                                          idCompt = snapshot.data![i]
+                                                  ['idcompetition']
+                                              .toString();
+                                          Competition.supprimer(
+                                              context, idCompt);
+                                        }),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Color.fromARGB(255, 218, 53, 53)),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(360),
+                                            side: BorderSide(
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                    child: IconButton(
+                                        icon: Icon(Icons.description_outlined),
+                                        onPressed: () {
+                                          idCompt = snapshot.data![i]
+                                                  ['idcompetition']
+                                              .toString();
+                                          Competition.ListeInscrit(
+                                              context, idCompt);
+                                        }),
                                   ),
                                 ],
                               )
@@ -130,6 +161,7 @@ class _AffichageState extends State<Affichage> {
         },
         child: const Text("+"),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }

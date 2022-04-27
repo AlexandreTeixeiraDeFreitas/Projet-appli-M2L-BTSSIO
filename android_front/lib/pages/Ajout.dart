@@ -25,18 +25,24 @@ class _AjoutState extends State<Ajout> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text("Ajouter une compétition"),
+          backgroundColor: Color.fromARGB(255, 218, 53, 53),
         ),
-        backgroundColor: Colors.white,
-        body: ProgressHUD(
-          child: Form(
-            key: globalFormKey,
-            child: _AjoutUI(context),
+        body: FractionallySizedBox(
+          child: Container(
+            child: Center(
+                child: ProgressHUD(
+              child: Form(
+                key: globalFormKey,
+                child: _AjoutUI(context),
+              ),
+              inAsyncCall: isAPIcallProcess,
+              opacity: 0.3,
+              key: UniqueKey(),
+            )),
           ),
-          inAsyncCall: isAPIcallProcess,
-          opacity: 0.3,
-          key: UniqueKey(),
         ),
       ),
     );
@@ -53,9 +59,10 @@ class _AjoutState extends State<Ajout> {
               child: Text(
                 " Nom compétition:",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.blue),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 124, 124, 124),
+                ),
               ),
             ),
             FormHelper.inputFieldWidget(
@@ -71,10 +78,10 @@ class _AjoutState extends State<Ajout> {
               (onSaved) {
                 nomcompetition = onSaved;
               },
-              borderFocusColor: Colors.blue,
-              borderColor: Colors.blue,
-              textColor: Colors.blue,
-              hintColor: Colors.blue.withOpacity(0.8),
+              borderFocusColor: Color.fromARGB(255, 124, 124, 124),
+              borderColor: Color.fromARGB(255, 124, 124, 124),
+              textColor: Color.fromARGB(255, 124, 124, 124),
+              hintColor: Color.fromARGB(255, 124, 124, 124).withOpacity(0.8),
               borderRadius: 10,
             ),
             const Padding(
@@ -84,13 +91,13 @@ class _AjoutState extends State<Ajout> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    color: Colors.blue),
+                    color: Color.fromARGB(255, 124, 124, 124)),
               ),
             ),
             FormHelper.inputFieldWidget(
               context,
               "test",
-              "année-mois-jour",
+              "aaaa-mm-jj",
               (onValidateVal) {
                 if (onValidateVal.isEmpty) {
                   return "La date ne peut être vide";
@@ -100,10 +107,10 @@ class _AjoutState extends State<Ajout> {
               (onSaved) {
                 date = onSaved;
               },
-              borderFocusColor: Colors.blue,
-              borderColor: Colors.blue,
-              textColor: Colors.blue,
-              hintColor: Colors.blue.withOpacity(0.8),
+              borderFocusColor: Color.fromARGB(255, 124, 124, 124),
+              borderColor: Color.fromARGB(255, 124, 124, 124),
+              textColor: Color.fromARGB(255, 124, 124, 124),
+              hintColor: Color.fromARGB(255, 124, 124, 124).withOpacity(0.8),
               borderRadius: 10,
             ),
             const Padding(
@@ -113,13 +120,13 @@ class _AjoutState extends State<Ajout> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    color: Colors.blue),
+                    color: Color.fromARGB(255, 124, 124, 124)),
               ),
             ),
             FormHelper.inputFieldWidget(
               context,
               "test",
-              "heure:minute:seconde",
+              "hh:mm:ss",
               (onValidateVal) {
                 if (onValidateVal.isEmpty) {
                   return "L'heure ne peut être vide";
@@ -129,10 +136,10 @@ class _AjoutState extends State<Ajout> {
               (onSaved) {
                 heure = onSaved;
               },
-              borderFocusColor: Colors.blue,
-              borderColor: Colors.blue,
-              textColor: Colors.blue,
-              hintColor: Colors.blue.withOpacity(0.8),
+              borderFocusColor: Color.fromARGB(255, 124, 124, 124),
+              borderColor: Color.fromARGB(255, 124, 124, 124),
+              textColor: Color.fromARGB(255, 124, 124, 124),
+              hintColor: Color.fromARGB(255, 124, 124, 124).withOpacity(0.8),
               borderRadius: 10,
             ),
             const Padding(
@@ -142,7 +149,7 @@ class _AjoutState extends State<Ajout> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    color: Colors.blue),
+                    color: Color.fromARGB(255, 124, 124, 124)),
               ),
             ),
             FormHelper.inputFieldWidget(
@@ -158,10 +165,10 @@ class _AjoutState extends State<Ajout> {
               (onSaved) {
                 tour = onSaved;
               },
-              borderFocusColor: Colors.blue,
-              borderColor: Colors.blue,
-              textColor: Colors.blue,
-              hintColor: Colors.blue.withOpacity(0.8),
+              borderFocusColor: Color.fromARGB(255, 124, 124, 124),
+              borderColor: Color.fromARGB(255, 124, 124, 124),
+              textColor: Color.fromARGB(255, 124, 124, 124),
+              hintColor: Color.fromARGB(255, 124, 124, 124).withOpacity(0.8),
               borderRadius: 10,
             ),
             const Padding(
@@ -171,7 +178,7 @@ class _AjoutState extends State<Ajout> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    color: Colors.blue),
+                    color: Color.fromARGB(255, 124, 124, 124)),
               ),
             ),
             FormHelper.inputFieldWidget(
@@ -187,10 +194,11 @@ class _AjoutState extends State<Ajout> {
               (onSaved) {
                 circuit = onSaved;
               },
-              borderFocusColor: Colors.blue,
-              borderColor: Colors.blue,
-              textColor: Colors.blue,
-              hintColor: Colors.blue.withOpacity(0.8),
+              //backgroundColor: Colors.white,
+              borderFocusColor: Color.fromARGB(255, 124, 124, 124),
+              borderColor: Color.fromARGB(255, 124, 124, 124),
+              textColor: Color.fromARGB(255, 124, 124, 124),
+              hintColor: Color.fromARGB(255, 124, 124, 124).withOpacity(0.8),
               borderRadius: 10,
             ),
             const SizedBox(
@@ -205,7 +213,7 @@ class _AjoutState extends State<Ajout> {
                       context, date, heure, 0, tour, nomcompetition, circuit);
                 }
               },
-                  btnColor: Colors.blue,
+                  btnColor: Color.fromARGB(255, 218, 53, 53),
                   borderColor: Colors.white,
                   txtColor: Colors.white,
                   borderRadius: 10),

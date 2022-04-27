@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Competition {
-  static String baseUrl = "https://jsonplaceholder.typicode.com";
   static Future<List> getAllComp() async {
     try {
       var res = await http.get(
@@ -12,6 +11,33 @@ class Competition {
 
       print(res.body);
       if (res.statusCode == 200) {
+        return jsonDecode(res.body);
+      } else {
+        return Future.error("erreur serveur");
+      }
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  static ListeInscrit(BuildContext context, idcompt) async {
+    try {
+      Navigator.pushNamed(context, '/inscrit', arguments: idcompt);
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  static Future<List> getAllInscrit(context, idComp) async {
+    try {
+      print('inscrit');
+      print(idComp);
+      var res = await http.get(
+        Uri.parse('http://192.168.22.98:5500/api/competition/inscrit/$idComp'),
+      );
+
+      if (res.statusCode == 200) {
+        print(res.body);
         return jsonDecode(res.body);
       } else {
         return Future.error("erreur serveur");
@@ -64,6 +90,20 @@ class Competition {
         Navigator.pushNamed(context, '/liste');
       } else {
         Navigator.pushNamed(context, '/');
+      }
+    } catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  static delinscrit(BuildContext context, idComp, idUser) async {
+    try {
+      var res = await http.get(Uri.parse(
+          'http://192.168.22.98:5500/api/competition/del_inscrit/$idComp/$idUser'));
+      if (res.statusCode == 200) {
+        Navigator.pushNamed(context, '/liste');
+      } else {
+        Navigator.pushNamed(context, '/liste');
       }
     } catch (err) {
       return Future.error(err);
