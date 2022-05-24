@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+const ip = '192.168.22.25';
+
 class Competition {
+  
   static Future<List> getAllComp() async {
     try {
       var res = await http.get(
-        Uri.parse('http://192.168.22.5:5500/api/competition'),
+        Uri.parse('http://$ip:5500/api/competition'),
       );
 
       print(res.body);
@@ -33,7 +36,7 @@ class Competition {
       print('inscrit');
       print(idComp);
       var res = await http.get(
-        Uri.parse('http://192.168.22.5:5500/api/competition/inscrit/$idComp'),
+        Uri.parse('http://$ip:5500/api/competition/inscrit/$idComp'),
       );
 
       if (res.statusCode == 200) {
@@ -52,7 +55,7 @@ class Competition {
       //var connection = {"email": login, "password": password};
       final res = await http.get(
         Uri.parse(
-            'http://192.168.22.5:5500/api/users/verify_mdp/$login/$password'),
+            'http://$ip:5500/api/users/verify_mdp/$login/$password'),
       );
       if (jsonDecode(res.body)["result"] == 'true' &&
           jsonDecode(res.body)["user"]["admin"] == 1) {
@@ -70,7 +73,7 @@ class Competition {
       nomcompetition, circuit) async {
     try {
       var res = await http.get(Uri.parse(
-          'http://192.168.22.5:5500/api/competition/add_competition/$circuit/$date/$heure/$en_cours/$tour/$nomcompetition'));
+          'http://$ip:5500/api/competition/add_competition/$circuit/$date/$heure/$en_cours/$tour/$nomcompetition'));
       if (res.statusCode == 200) {
         Navigator.pushNamed(context, '/liste');
       } else {
@@ -85,7 +88,7 @@ class Competition {
     print('id del $id');
     try {
       var res = await http.get(Uri.parse(
-          'http://192.168.22.5:5500/api/competition/del_competition/$id'));
+          'http://$ip:5500/api/competition/del_competition/$id'));
       if (res.statusCode == 200) {
         Navigator.pushNamed(context, '/liste');
       } else {
@@ -99,7 +102,7 @@ class Competition {
   static delinscrit(BuildContext context, idComp, idUser) async {
     try {
       var res = await http.get(Uri.parse(
-          'http://192.168.22.5:5500/api/competition/del_inscrit/$idComp/$idUser'));
+          'http://$ip:5500/api/competition/del_inscrit/$idComp/$idUser'));
       if (res.statusCode == 200) {
         Navigator.pushNamed(context, '/liste');
       } else {
