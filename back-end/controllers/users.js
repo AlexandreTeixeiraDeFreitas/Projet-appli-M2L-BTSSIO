@@ -42,9 +42,10 @@ module.exports = {
             const email = req.params.email;
             const mdp = req.params.mdp;
             const result = await connexion.query('CALL verify_mdp("'+email+'")');
-            console.log(result[0][0].mdp);
+            console.log(result[0][0]);
             console.log(mdp, email);
-        
+
+        if(result[0][0]){
             if(result[0][0].mdp === mdp){
                 console.log('true');
                 return res.status(200).send({"result": 'true', 'user': result[0][0]})
@@ -52,6 +53,9 @@ module.exports = {
                 console.log('false');
                 return res.status(200).send({"result": 'false'})
             }
+        }else{
+            return res.status(200).send({"result": 'false'})
+        }
             
 
 
