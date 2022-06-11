@@ -24,7 +24,7 @@ router.route('/circuit/del_circuit/:id')
 
 router.route('/competition')
     .get(competition);
-router.route('/competition/add_competition/:circuit/:date/:heure/:en_cours/:tour/:nomcompetition')
+router.route('/competition/add_competition/:circuit/:date/:heure/:en_cour/:tour/:nomcompetition')
     .get(add_competition);
 router.route('/competition/del_competition/:id')
     .get(del_competition);
